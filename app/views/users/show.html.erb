@@ -1,0 +1,54 @@
+		
+
+        
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
+        <script type='text/javascript'>
+
+        	$(document).ready(function(){
+  				$('.grid').slick({
+    				setting-name: setting-value
+  				});
+			});
+        </script>
+	<div class="container">
+		<header class="codrops-header">
+
+			<h1>Welcome to your Profile <span>Hello <%= @user.first_name %> <%= @user.last_name %></span></h1>
+			<nav class="codrops-demos">
+				<a href="index.html">Back to Photos!</a>
+
+			</nav>
+		</header>
+		<div class="no-js">
+		<div class="content">
+
+			<div class="grid">
+					<% @photos.each do |elem| %>
+		
+				<div class="grid__item" data-size="1280x960">
+				<% @image1 = elem.image.url(:large) %>
+		<% @image2 = elem.image.url %>
+					<a href="<%= @image1 %>" class="img-wrap"><img src="<%= @image2 %>"/>
+						<div class="description description--grid">Assemblage</div>
+					</a>
+					</div>
+					<% end %>
+					</div>
+			<div class="preview">
+				<button class="action action--close"><i class="fa fa-times"></i><span class="text-hidden">Close</span></button>
+				<div class="description description--preview"></div>
+			</div>
+			</div>
+</div>
+</div>
+
+	<% javascript 'classie' %> 
+	<% javascript 'masonry.pkgd.min' %>
+		<% javascript 'imagesloaded.pkgd.min' %>
+			<% javascript 'modernizr-custom' %>
+
+			<% javascript 'slick.min' %>
+		<%= javascript_include_tag 'main', 'data-turbolinks-track': 'reload' %>
+	
+		<%= javascript_include_tag 'code', 'data-turbolinks-track': 'reload' %>

@@ -1,0 +1,127 @@
+  [1m[35m (253.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "photosandastory_test"[0m
+  [1m[35m (1096.0ms)[0m  [1m[35mCREATE DATABASE "photosandastory_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (117.4ms)[0m  [1m[35mCREATE TABLE "comments" ("id" serial primary key, "content" character varying, "user_id" integer, "photo_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (60.6ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_photo_id" ON "comments" USING btree ("photo_id")[0m
+  [1m[35m (74.8ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments" USING btree ("user_id")[0m
+  [1m[35m (98.7ms)[0m  [1m[35mCREATE TABLE "photos" ("id" serial primary key, "title" character varying, "city" character varying, "state" character varying, "description" text, "story" text, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "image_file_name" character varying, "image_content_type" character varying, "image_file_size" integer, "image_updated_at" timestamp)[0m
+  [1m[35m (51.5ms)[0m  [1m[35mCREATE  INDEX  "index_photos_on_user_id" ON "photos" USING btree ("user_id")[0m
+  [1m[35m (109.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "password_digest" character varying, "age" integer, "city" character varying, "state" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (9.8ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_8e6de2dbfc"
+FOREIGN KEY ("photo_id")
+  REFERENCES "photos" ("id")
+[0m
+  [1m[35m (10.2ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (10.2ms)[0m  [1m[35mALTER TABLE "photos" ADD CONSTRAINT "fk_rails_c79d76afc0"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (86.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (9.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170425193314)[0m
+  [1m[35m (10.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170425033229),
+(20170425033319),
+(20170425033300);
+
+[0m
+  [1m[35m (84.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", 2017-04-28 03:24:27 UTC], ["updated_at", 2017-04-28 03:24:27 UTC]]
+  [1m[35m (10.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (18.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.316806', '2017-04-28 03:24:28.316806', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.316806', '2017-04-28 03:24:28.316806', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.322172', '2017-04-28 03:24:28.322172', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.322172', '2017-04-28 03:24:28.322172', 298486374, 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.570467', '2017-04-28 03:24:28.570467', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.570467', '2017-04-28 03:24:28.570467', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.573326', '2017-04-28 03:24:28.573326', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.573326', '2017-04-28 03:24:28.573326', 298486374, 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.689686', '2017-04-28 03:24:28.689686', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.689686', '2017-04-28 03:24:28.689686', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.692565', '2017-04-28 03:24:28.692565', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.692565', '2017-04-28 03:24:28.692565', 298486374, 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.807782', '2017-04-28 03:24:28.807782', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.807782', '2017-04-28 03:24:28.807782', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.810512', '2017-04-28 03:24:28.810512', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.810512', '2017-04-28 03:24:28.810512', 298486374, 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.926713', '2017-04-28 03:24:28.926713', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:28.926713', '2017-04-28 03:24:28.926713', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.929202', '2017-04-28 03:24:28.929202', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:28.929202', '2017-04-28 03:24:28.929202', 298486374, 298486374)[0m
+  [1m[35m (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:29.044274', '2017-04-28 03:24:29.044274', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:29.044274', '2017-04-28 03:24:29.044274', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:29.047023', '2017-04-28 03:24:29.047023', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:29.047023', '2017-04-28 03:24:29.047023', 298486374, 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:29.162839', '2017-04-28 03:24:29.162839', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:29.162839', '2017-04-28 03:24:29.162839', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:29.165353', '2017-04-28 03:24:29.165353', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:29.165353', '2017-04-28 03:24:29.165353', 298486374, 298486374)[0m
+  [1m[35m (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "photos" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "comments"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:29.280698', '2017-04-28 03:24:29.280698', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "created_at", "updated_at", "id", "user_id", "photo_id") VALUES ('MyString', '2017-04-28 03:24:29.280698', '2017-04-28 03:24:29.280698', 298486374, 298486374, 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "photos"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:29.283404', '2017-04-28 03:24:29.283404', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "photos" ("title", "city", "state", "description", "story", "created_at", "updated_at", "id", "user_id") VALUES ('MyString', 'MyString', 'MyString', 'MyText', 'MyText', '2017-04-28 03:24:29.283404', '2017-04-28 03:24:29.283404', 298486374, 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
